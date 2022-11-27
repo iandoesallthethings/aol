@@ -1,5 +1,9 @@
 # America Online
 
+[![Languages](https://4.vercel.app/github/languageall/iandoesallthethings/aol)](https://aol-eight.vercel.app)
+
+[![Production](https://github.com/iandoesallthethings/aol/environments/production/badge.svg)](https://aol-eight.vercel.app)
+
 My dad misses the pageantry of connecting to AOL, so I'm building out the whole experience with the intention of setting it as his new tab page or something. Maybe build it as a chrome extension?
 
 ## Developing

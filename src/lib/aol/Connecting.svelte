@@ -19,28 +19,37 @@ function runStep(index: number) {
 function increment() {
 	$state = $state + 1
 
-	if ($state > sequence.length - 1) dispatch('connect')
+	if ($state > sequence.length - 1) connect()
 
 	runStep($state)
 }
+
+function connect() {
+	dispatch('connect')
+}
+
+function cancel() {
+	dispatch('cancel')
+}
+
 /*
-		(just the a in box 3)
-			'Step 1: Initializing modem...'
-		(start dialtone)
-			'Modem initialization OK...' 
-		(add person in box 1)
-			'Step 2: Dialing 770-867-5309'
-		(Dialing sounds)
-		
-		(running man in box 2)
-			'Step 3: Connected at 52000 bps...'
-			'Step 4: Requesting network attention...'
-			'Step 5: Talking to network...'
-			'Step 6: Connecting to America Online...'
-		(people over A in box 3)
-			'Step 7: Checking password...'
-		(Welcome)
-	 */
+	(just the a in box 3)
+		'Step 1: Initializing modem...'
+	(start dialtone)
+		'Modem initialization OK...' 
+	(add person in box 1)
+		'Step 2: Dialing 770-867-5309'
+	(Dialing sounds)
+	
+	(running man in box 2)
+		'Step 3: Connected at 52000 bps...'
+		'Step 4: Requesting network attention...'
+		'Step 5: Talking to network...'
+		'Step 6: Connecting to America Online...'
+	(people over A in box 3)
+		'Step 7: Checking password...'
+	(Welcome)
+*/
 
 let sequence: Step[] = [
 	{
@@ -63,11 +72,9 @@ let sequence: Step[] = [
 		duration: 1,
 	},
 ]
-
-function cancel() {
-	dispatch('cancel')
-}
 </script>
+
+<Button classes="fixed bottom-2 left-2" on:click={connect}>skip</Button>
 
 <Window classes="bg-white w-96" contentClasses="col center gap-2 py-2">
 	<img src="aol.svg" alt="America Online" class=" block h-24" />

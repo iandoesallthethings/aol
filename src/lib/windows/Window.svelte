@@ -8,7 +8,7 @@ export let contentClasses = ''
 export let menuItems: string[] | 'default' | undefined = undefined
 </script>
 
-<div class="border-2 border-gray-300 column {classes}">
+<div class="border-2 border-gray-300 col {classes}">
 	{#if title}
 		<TitleBar>{title}</TitleBar>
 	{/if}
@@ -17,7 +17,7 @@ export let menuItems: string[] | 'default' | undefined = undefined
 		<MenuBar items={menuItems} />
 	{/if}
 
-	<div class="w-full h-full {contentClasses}">
+	<div class="w-full flex-grow  {contentClasses}">
 		<slot />
 	</div>
 </div>

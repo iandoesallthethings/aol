@@ -3,6 +3,7 @@ import Window from '$lib/windows/Window.svelte'
 import AolLogo from '$lib/aol/Logo.svelte'
 import { createEventDispatcher } from 'svelte'
 import Button from './Button.svelte'
+import db from '$lib/db'
 const dispatch = createEventDispatcher()
 
 function signOn() {
@@ -21,27 +22,29 @@ function signOn() {
 			</div>
 		</div>
 
-		<div class="col p-2 gap-4">
+		<div class="col p-4 gap-8 justify-end">
 			<label class="col">
 				Select Screen Name:
 				<select>
-					<option>Guest</option>
+					{#each $db.users as user}
+						<option>{user.username}</option>
+					{/each}
 				</select>
 			</label>
 
-			<label class="col">
+			<label class="col gap-4 py-4">
 				Select Location:
 				<select>
 					<option>ISP/LAN Connection</option>
 				</select>
-			</label>
 
-			<div class="row center gap-4">
-				<Button>SETUP</Button>
-				<Button>ACCESS NUMBERS</Button>
-				<Button>HELP</Button>
-				<Button on:click={signOn}>SIGN ON</Button>
-			</div>
+				<div class="row center gap-4">
+					<Button>SETUP</Button>
+					<Button>ACCESS NUMBERS</Button>
+					<Button>HELP</Button>
+					<Button on:click={signOn}>SIGN ON</Button>
+				</div>
+			</label>
 		</div>
 	</div>
 </Window>
