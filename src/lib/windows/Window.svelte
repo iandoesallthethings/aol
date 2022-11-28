@@ -1,23 +1,33 @@
 <script lang="ts">
 import MenuBar from './MenuBar.svelte'
-import TitleBar from './TitleBar.svelte'
 
 export let title: string | undefined = undefined
 export let classes = ''
 export let contentClasses = ''
 export let menuItems: string[] | 'default' | undefined = undefined
+export let inactive = false
 </script>
 
-<div class="border-2 border-gray-300 col {classes}">
+<div id={title} class="window col min-w-44 max-w-full {classes}">
 	{#if title}
-		<TitleBar>{title}</TitleBar>
+		<div class="title-bar" class:inactive>
+			<div class="title-bar-text">
+				{title}
+			</div>
+
+			<div class="title-bar-controls">
+				<button aria-label="Minimize" />
+				<button aria-label="Maximize" />
+				<button aria-label="Close" />
+			</div>
+		</div>
 	{/if}
 
 	{#if menuItems}
-		<MenuBar items={menuItems} />
+		<MenuBar on:menuclick items={menuItems} />
 	{/if}
 
-	<div class="w-full flex-grow  {contentClasses}">
+	<div class="window-body !m-0 h-full w-full {contentClasses}">
 		<slot />
 	</div>
 </div>

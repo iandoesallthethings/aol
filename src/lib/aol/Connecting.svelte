@@ -1,9 +1,11 @@
 <script lang="ts">
-import type { Step } from '$types'
+import DebugWindow from '$lib/DebugWindow.svelte'
 import Window from '$lib/windows/Window.svelte'
 import { createEventDispatcher, onMount } from 'svelte'
 import { writable } from 'svelte/store'
 import Button from './Button.svelte'
+import { sequence } from './connectingSequence'
+
 const dispatch = createEventDispatcher()
 
 const state = writable<number>(0)
@@ -31,52 +33,13 @@ function connect() {
 function cancel() {
 	dispatch('cancel')
 }
-
-/*
-	(just the a in box 3)
-		'Step 1: Initializing modem...'
-	(start dialtone)
-		'Modem initialization OK...' 
-	(add person in box 1)
-		'Step 2: Dialing 770-867-5309'
-	(Dialing sounds)
-	
-	(running man in box 2)
-		'Step 3: Connected at 52000 bps...'
-		'Step 4: Requesting network attention...'
-		'Step 5: Talking to network...'
-		'Step 6: Connecting to America Online...'
-	(people over A in box 3)
-		'Step 7: Checking password...'
-	(Welcome)
-*/
-
-let sequence: Step[] = [
-	{
-		duration: 1,
-	},
-	{
-		state: 'Dialing...',
-		duration: 2,
-	},
-	{
-		state: 'Dialing 770-867-5309...',
-		duration: 4,
-	},
-	{
-		state: 'Connecting...',
-		duration: 2,
-	},
-	{
-		state: 'Connected!',
-		duration: 1,
-	},
-]
 </script>
 
-<Button classes="fixed bottom-2 left-2" on:click={connect}>skip</Button>
+<DebugWindow>
+	<button on:click={connect}>skip</button>
+</DebugWindow>
 
-<Window classes="bg-white w-96" contentClasses="col center gap-2 py-2">
+<Window classes="!bg-white w-96" contentClasses="col center gap-2 py-2">
 	<img src="aol.svg" alt="America Online" class=" block h-24" />
 
 	<div class="row center gap-1">

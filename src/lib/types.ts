@@ -1,10 +1,12 @@
 export type State =
-	| 'logged out'
+	| 'signed off'
 	| 'Dialing...'
 	| 'Dialing 770-867-5309...'
 	| 'Connecting...'
 	| 'Connected!'
-	| 'logged in'
+	| 'signed on'
+
+export type AnchorTarget = '_self' | '_blank' | '_parent' | '_top' | 'framename' | 'noopener'
 
 export type NumberOfMilliseconds = number
 export type NumberOfSeconds = number

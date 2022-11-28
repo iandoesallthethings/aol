@@ -11,7 +11,7 @@ function signOn() {
 }
 </script>
 
-<Window title="Sign On" classes="bg-white aspect-4/3">
+<Window title="Sign On" classes="!bg-white aspect-4/3">
 	<div class="row h-full w-30">
 		<div class="obi bg-aol-blue-dark text-white col h-full justify-between items-center p-2">
 			<AolLogo classes="!fill-white w-16" />
@@ -50,10 +50,6 @@ function signOn() {
 </Window>
 
 <style>
-button {
-	@apply bg-aol-blue-dark px-2 py-1 shadow-lg text-white text-xs whitespace-nowrap;
-}
-
 select {
 	@apply border;
 }

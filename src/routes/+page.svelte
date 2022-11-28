@@ -1,27 +1,36 @@
 <script lang="ts">
-import BuddyList from '$lib/aol/BuddyList.svelte'
-import Button from '$lib/aol/Button.svelte'
+// import BuddyList from '$lib/aol/BuddyList.svelte'
 import Channels from '$lib/aol/Channels.svelte'
 import Connecting from '$lib/aol/Connecting.svelte'
-import Login from '$lib/aol/Login.svelte'
+import SignOn from '$lib/aol/SignOn.svelte'
+import DebugWindow from '$lib/DebugWindow.svelte'
+import { writable } from 'svelte/store'
 
-type AuthState = 'logged out' | 'connecting' | 'logged in'
+type AuthState = 'signed off' | 'connecting' | 'signed on'
 
-let state: AuthState = 'logged out'
+let state = writable<AuthState>('signed off')
 
 function setState(newState: AuthState) {
-	return () => (state = newState)
+	return () => {
+		console.debug('setting', newState)
+		$state = newState
+	}
 }
 </script>
 
-{#if state === 'logged out'}
-	<Login on:signOn={setState('connecting')} />
-{:else if state === 'connecting'}
-	<Connecting on:cancel={setState('logged out')} on:connect={setState('logged in')} />
-{:else if state === 'logged in'}
-	<Button classes="fixed bottom-2 left-2" on:click={setState('logged out')}>Sign Out</Button>
+{#if $state === 'signed off'}
+	<SignOn on:signOn={setState('connecting')} />
+
+	<DebugWindow>
+		<button on:click={setState('signed on')}>Sign in</button>
+	</DebugWindow>
+{:else if $state === 'connecting'}
+	<Connecting on:cancel={setState('signed off')} on:connect={setState('signed on')} />
+{:else if $state === 'signed on'}
+	<DebugWindow>
+		<button on:click={setState('signed off')}>Sign Out</button>
+	</DebugWindow>
 
 	<Channels />
-
-	<BuddyList />
+	<!-- <BuddyList /> -->
 {/if}

@@ -1,14 +1,20 @@
 <script lang="ts">
-	export let classes = ''
+import type { AnchorTarget } from '$types'
+export let classes = ''
+import MaybeA from '$lib/MaybeA.svelte'
+
+export let href: string | undefined = undefined
+export let target: AnchorTarget | undefined = undefined
 </script>
 
-<button
-	class="
-		w-5 h-5  
-		row center 
-		bg-gray-400 p-0 
-		{classes}
+<MaybeA {href} {target}>
+	<button
+		class="
+			row center 
+			whitespace-nowrap
+			{classes}
 		"
->
-	<slot />
-</button>
+	>
+		<slot />
+	</button>
+</MaybeA>

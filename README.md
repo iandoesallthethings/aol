@@ -6,6 +6,10 @@
 
 My dad misses the pageantry of connecting to AOL, so I'm building out the whole experience with the intention of setting it as his new tab page or something. Maybe build it as a chrome extension?
 
+Windows 98 css lives here: https://jdan.github.io/98.css
+
+Icons live here: https://win98icons.alexmeub.com/
+
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
