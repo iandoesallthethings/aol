@@ -1,12 +1,15 @@
 <script lang="ts">
+import { browser } from '$app/environment'
+import { createEventDispatcher, onMount, onDestroy } from 'svelte'
+import { writable } from 'svelte/store'
+import createAudio from '$lib/audio'
 import DebugWindow from '$lib/DebugWindow.svelte'
 import Window from '$lib/windows/Window.svelte'
-import { createEventDispatcher, onMount } from 'svelte'
-import { writable } from 'svelte/store'
 import Button from './Button.svelte'
 import { sequence } from './connectingSequence'
 
 const dispatch = createEventDispatcher()
+const audio = createAudio()
 
 const state = writable<number>(0)
 
@@ -15,7 +18,10 @@ onMount(() => runStep($state))
 function runStep(index: number) {
 	const step = sequence[index]
 
-	if (step) window?.setTimeout(increment, step.duration * 1000)
+	if (!(browser && step)) return
+
+	if (step.audio) return audio.play(step.audio, increment)
+	else if (step.duration) window.setTimeout(increment, step.duration * 1000)
 }
 
 function increment() {
@@ -33,10 +39,26 @@ function connect() {
 function cancel() {
 	dispatch('cancel')
 }
+
+onDestroy(audio.stop)
 </script>
 
 <DebugWindow>
 	<button on:click={connect}>skip</button>
+
+	<label>
+		<div>Progress</div>
+		<input type="range" bind:value={$audio.currentTime} min="0" max={$audio.duration} step="0.01" />
+	</label>
+	<label>
+		<div>Volume</div>
+		<input type="range" bind:value={$audio.volume} min="0" max="1" step="0.1" />
+	</label>
+
+	<label>
+		<div>Speed</div>
+		<input type="range" bind:value={$audio.playbackRate} min="0.1" max="10" step="0.1" />
+	</label>
 </DebugWindow>
 
 <Window classes="!bg-white w-96" contentClasses="col center gap-2 py-2">
@@ -77,5 +99,9 @@ function cancel() {
 
 .frame {
 	@apply p-1 border-r border-b border-gray-700;
+}
+
+label {
+	@apply flex flex-row items-center justify-between;
 }
 </style>

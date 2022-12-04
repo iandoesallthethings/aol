@@ -11,10 +11,7 @@ type AuthState = 'signed off' | 'connecting' | 'signed on'
 let state = writable<AuthState>('signed off')
 
 function setState(newState: AuthState) {
-	return () => {
-		console.debug('setting', newState)
-		$state = newState
-	}
+	return () => ($state = newState)
 }
 </script>
 

@@ -20,15 +20,12 @@ import type { Step } from '$types'
 
 export const sequence: Step[] = [
 	{
+		state: ' ',
 		duration: 1,
 	},
 	{
 		state: 'Dialing...',
-		duration: 2,
-	},
-	{
-		state: 'Dialing 770-867-5309...',
-		duration: 4,
+		audio: 'dialup.mp3',
 	},
 	{
 		state: 'Connecting...',

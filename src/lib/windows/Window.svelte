@@ -1,14 +1,26 @@
 <script lang="ts">
+import clickInOrOut from '$lib/clickOutside'
 import MenuBar from './MenuBar.svelte'
 
 export let title: string | undefined = undefined
 export let classes = ''
 export let contentClasses = ''
 export let menuItems: string[] | 'default' | undefined = undefined
-export let inactive = false
+export let inactive = true
+
+function clickOut() {
+	inactive = true
+}
+function clickIn() {
+	inactive = false
+}
 </script>
 
-<div id={title} class="window col min-w-44 max-w-full {classes}">
+<div
+	id={title}
+	class="window col min-w-44 max-w-full {classes}"
+	use:clickInOrOut={{ clickIn, clickOut }}
+>
 	{#if title}
 		<div class="title-bar" class:inactive>
 			<div class="title-bar-text">
