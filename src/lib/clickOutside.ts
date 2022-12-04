@@ -1,11 +1,11 @@
 interface Options {
-	clickIn: (node: Node) => boolean | void
-	clickOut: (node: Node) => boolean | void
+	clickIn: (node?: Node) => boolean | void
+	clickOut: (node?: Node) => boolean | void
 }
 
 const defaultOptions: Options = {
-	clickOut: (node: Node) => node.dispatchEvent('out'),
-	clickIn: (node: Node) => node.dispatchEvent('in'),
+	clickOut: (node?: Node) => node?.dispatchEvent(new CustomEvent('out')),
+	clickIn: (node?: Node) => node?.dispatchEvent(new CustomEvent('in')),
 }
 export default function clickInOrOut(node: Node, options: Options = defaultOptions) {
 	const handleClick = (event: MouseEvent) => {

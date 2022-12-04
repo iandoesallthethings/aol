@@ -1,7 +1,13 @@
 <script lang="ts">
 import createClock from '$lib/clock'
+import { createEventDispatcher } from 'svelte'
 
+const dispatch = createEventDispatcher()
 const clock = createClock()
+
+function selectTask(windowName: string) {
+	dispatch('selectTask', windowName)
+}
 </script>
 
 <div class="window row gap-1">
@@ -13,7 +19,7 @@ const clock = createClock()
 	</button>
 
 	<div class="row justify-start grow gap-2">
-		<button class="active">America Online</button>
+		<button class="active" on:click={() => selectTask('America Online')}>America Online</button>
 	</div>
 
 	<div class="status-bar">

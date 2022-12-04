@@ -14,7 +14,7 @@ const defaultOptions: ClockOptions = {
 	format: {
 		hour: 'numeric',
 		minute: 'numeric',
-		second: 'numeric',
+		// second: 'numeric',
 	},
 }
 

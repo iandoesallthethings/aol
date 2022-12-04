@@ -4,9 +4,15 @@ import '98.css'
 import debug from '$lib/debug'
 import TaskBar from '$lib/windows/TaskBar.svelte'
 import Window from '$lib/windows/Window.svelte'
+import { browser } from '$app/environment'
 
 function toggleDebug(event: CustomEvent) {
 	if (event.detail === 'Help') debug.toggle()
+}
+
+function selectTask(event: CustomEvent) {
+	const windowId = event.detail
+	if (windowId) document.getElementById(windowId)?.click()
 }
 </script>
 
@@ -21,5 +27,5 @@ function toggleDebug(event: CustomEvent) {
 		<slot />
 	</Window>
 
-	<TaskBar />
+	<TaskBar on:selectTask={selectTask} />
 </div>
