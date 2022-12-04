@@ -62,22 +62,28 @@ onDestroy(audio.stop)
 </DebugWindow>
 
 <Window classes="!bg-white w-96" contentClasses="col center gap-2 py-2">
-	<img src="aol.svg" alt="America Online" class=" block h-24" />
+	<img src="aol/aol.svg" alt="America Online" class=" block h-24" />
 
 	<div class="row center gap-1">
 		<div class="frame">
 			<div class="box">
-				{#if $state > 0} 1 {/if}
+				{#if $state > 0}
+					<img src="aol/dialup1.png" alt="Dialing..." />
+				{/if}
 			</div>
 		</div>
 		<div class="frame">
 			<div class="box">
-				{#if $state > 2} 2 {/if}
+				{#if $state > 2}
+					<img src="aol/dialup2.png" alt="Connecting..." />
+				{/if}
 			</div>
 		</div>
 		<div class="frame">
 			<div class="box">
-				{#if $state > 3} 3 {/if}
+				{#if $state > 6}
+					<img src="aol/dialup3.png" alt="Connected!" />
+				{/if}
 			</div>
 		</div>
 	</div>

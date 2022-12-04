@@ -25,14 +25,30 @@ export const sequence: Step[] = [
 	},
 	{
 		state: 'Dialing...',
-		audio: 'dialup.mp3',
-	},
-	{
-		state: 'Connecting...',
 		duration: 2,
 	},
 	{
-		state: 'Connected!',
+		state: 'Dialing 770-867-5309...',
+		audio: 'aol/dialup.mp3',
+	},
+	{
+		state: 'Connected at 52000 bps...',
 		duration: 1,
+	},
+	{
+		state: 'Requesting network attention...',
+		duration: 1,
+	},
+	{
+		state: 'Talking to network...',
+		duration: 1,
+	},
+	{
+		state: 'Connecting to America Online...',
+		duration: 3,
+	},
+	{
+		state: 'Checking password...',
+		duration: 2,
 	},
 ]

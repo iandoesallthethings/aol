@@ -6,6 +6,7 @@ export type State =
 	| 'Connecting...'
 	| 'Connected!'
 	| 'signed on'
+	| string
 
 export type AnchorTarget = '_self' | '_blank' | '_parent' | '_top' | 'framename' | 'noopener'
 

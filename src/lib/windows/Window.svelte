@@ -23,7 +23,8 @@ function clickIn() {
 >
 	{#if title}
 		<div class="title-bar" class:inactive>
-			<div class="title-bar-text">
+			<div class="title-bar-text row center gap-2">
+				<img src="aol/aol-a.png" width="16px" alt="AOL" />
 				{title}
 			</div>
 

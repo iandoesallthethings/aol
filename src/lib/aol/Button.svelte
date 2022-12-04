@@ -6,6 +6,7 @@ export let classes = ''
 export let href: string | undefined = undefined
 export let target: AnchorTarget | undefined = undefined
 export let disabled = false
+export let backgroundImage = ''
 </script>
 
 <MaybeA {href} {target}>
@@ -17,7 +18,9 @@ export let disabled = false
 			px-4 py-1 
 			text-xs whitespace-nowrap 
 			{classes}
+			bg-cover
 		"
+		style="background-image: url({backgroundImage.toLowerCase()});"
 		{disabled}
 	>
 		<slot />

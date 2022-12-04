@@ -7,12 +7,12 @@ export default function createAudio() {
 
 	const audio = writable<HTMLAudioElement>(new Audio())
 
-	function play(path: AudioFilePath, callback: () => void | undefined) {
+	function play(path: AudioFilePath, callback?: () => void | undefined) {
 		const $audio = get(audio)
 
 		$audio.src = path
 		$audio.preload = 'auto'
-		$audio.onended = callback
+		if (callback) $audio.onended = callback
 
 		$audio.play()
 	}

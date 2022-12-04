@@ -1,31 +1,43 @@
 <script lang="ts">
+import createAudio from '$lib/audio'
 import Window from '$lib/windows/Window.svelte'
+import { onMount, onDestroy } from 'svelte'
 import Button from './Button.svelte'
 import Logo from './Logo.svelte'
+const audio = createAudio()
+
+function maybeHaveMail() {
+	if (Math.random() > 0.5) audio.play('aol/sounds/youvegotmail.wav')
+}
+
+onMount(() => audio.play('aol/sounds/welcome.wav', maybeHaveMail))
+
+onDestroy(() => audio.play('aol/sounds/goodbye.wav', audio.stop))
 
 const channels = [
-	'Return to Welcome',
-	'Search',
-	'AOL Today',
-	'News',
-	'Sports',
-	'Influence',
-	'Travel',
+	'returntowelcome',
+	'search',
+	'aoltoday',
+	'news',
+	'sports',
+	'influence',
+	'travel',
 	'international',
-	'Personal Finance',
-	'WorkPlace',
-	'Computing',
-	'Research @ Learn', // sic
+	'personalfinance',
+	'workplace',
+	'computing',
+	'researchandlearn',
 	'entertainment',
-	'Games',
-	'Interests',
-	'Lifestyles',
-	'Shopping',
-	'Health',
+	'games',
+	'interests',
+	'lifestyles',
+	'shopping',
+	'health',
 	'families',
-	'KiDS ONLY',
-	'Local',
+	'kidsonly',
+	'local',
 ]
+console.debug(channels.map((c) => c.toLowerCase()))
 </script>
 
 <Window title="Channels" classes="!bg-white">
@@ -33,7 +45,12 @@ const channels = [
 		<Logo classes="row-span-3 p-2" />
 
 		{#each channels as channel}
-			<Button href="http://google.com" target="_blank" classes="w-full">
+			<Button
+				backgroundImage="aol/channels/{channel}.png"
+				href=""
+				target="_blank"
+				classes="w-full text-transparent"
+			>
 				{channel}
 			</Button>
 		{/each}
