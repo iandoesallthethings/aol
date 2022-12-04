@@ -5,8 +5,10 @@ import { createEventDispatcher } from 'svelte'
 const dispatch = createEventDispatcher()
 const clock = createClock()
 
-function selectTask(windowName: string) {
-	dispatch('selectTask', windowName)
+function selectTask(event: MouseEvent) {
+	const button = event.target as HTMLButtonElement
+
+	dispatch('selectTask', button.innerText)
 }
 </script>
 
@@ -19,7 +21,7 @@ function selectTask(windowName: string) {
 	</button>
 
 	<div class="row justify-start grow gap-2">
-		<button class="active" on:click={() => selectTask('America Online')}>America Online</button>
+		<button class="active" on:click={selectTask}>America Online</button>
 	</div>
 
 	<div class="status-bar">
